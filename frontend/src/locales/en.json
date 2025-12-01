@@ -1,0 +1,21 @@
+{
+  "dashboard": "Dashboard",
+  "search": "Search...",
+  "menu": "Menu",
+  "home": "Home",
+  "categories": "Categories",
+  "settings": "Settings",
+  "about": "About",
+  "Feedback": "Feedback",
+  "notifications": "Notifications",
+
+  "user_form": "User Form",
+  "name": "Name",
+  "email": "Email",
+  "add": "Add",
+  "theme": "Theme",
+  "action": "Action",
+  "view": "View",
+  "dark": "Dark",
+  "light": "Light"
+}

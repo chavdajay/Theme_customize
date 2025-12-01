@@ -14,10 +14,13 @@ import InfoIcon from "@mui/icons-material/Info";
 import FeedbackIcon from "@mui/icons-material/Feedback";
 import ChevronLeft from "@mui/icons-material/ChevronLeft";
 import ChevronRight from "@mui/icons-material/ChevronRight";
+import { useLang } from "../context/LanguageContext"; // lagauge
 
 const drawerWidth = 240;
 
 export default function Sidebar({ open = true, onToggle = () => {} }) {
+  const { t } = useLang(); // lagauge
+
   return (
     <Drawer
       variant="permanent"
@@ -44,7 +47,8 @@ export default function Sidebar({ open = true, onToggle = () => {} }) {
           color: "text.primary",
         }}
       >
-        {open && <strong style={{ paddingLeft: 8 }}>Menu</strong>}
+        {/* // lagauge */}
+        {open && <strong>{t("menu")}</strong>}
         <IconButton onClick={onToggle} size="small">
           {open ? <ChevronLeft /> : <ChevronRight />}
         </IconButton>
@@ -57,14 +61,16 @@ export default function Sidebar({ open = true, onToggle = () => {} }) {
           <ListItemIcon>
             <HomeIcon />
           </ListItemIcon>
-          {open && <ListItemText primary="Home" />}
+          {/* // lagauge */}
+          {open && <ListItemText primary={t("home")} />}
         </ListItem>
 
         <ListItem button>
           <ListItemIcon>
             <CategoryIcon />
           </ListItemIcon>
-          {open && <ListItemText primary="Categories" />}
+          {/* // lagauge */}
+          {open && <ListItemText primary={t("categories")} />}
         </ListItem>
       </List>
 
@@ -77,21 +83,22 @@ export default function Sidebar({ open = true, onToggle = () => {} }) {
             <ListItemIcon>
               <SettingsIcon />
             </ListItemIcon>
-            {open && <ListItemText primary="Settings" />}
+            {/* // lagauge */}
+            {open && <ListItemText primary={t("settings")} />}
           </ListItem>
 
           <ListItem button>
             <ListItemIcon>
               <InfoIcon />
             </ListItemIcon>
-            {open && <ListItemText primary="About" />}
+            {open && <ListItemText primary={t("about")} />}
           </ListItem>
 
           <ListItem button>
             <ListItemIcon>
               <FeedbackIcon />
             </ListItemIcon>
-            {open && <ListItemText primary="Feedback" />}
+            {open && <ListItemText primary={t("Feedback")} />}
           </ListItem>
         </List>
       </Box>

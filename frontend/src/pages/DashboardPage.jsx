@@ -11,11 +11,14 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Switch from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import { useLang } from "../context/LanguageContext"; // lagauge
 
 export default function DashboardPage() {
+  const { t } = useLang(); // lagauge
+
   const [formData, setFormData] = useState({ name: "", email: "" });
   const [users, setUsers] = useState([]);
-  const [userThemes, setUserThemes] = useState({}); // userEmail: true/false (dark/light)
+  const [userThemes, setUserThemes] = useState({});
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -25,7 +28,6 @@ export default function DashboardPage() {
     if (!formData.name || !formData.email) return;
     setUsers([...users, formData]);
 
-    // default theme light (false)
     if (!userThemes[formData.email]) {
       setUserThemes({ ...userThemes, [formData.email]: false });
     }
@@ -33,36 +35,36 @@ export default function DashboardPage() {
     setFormData({ name: "", email: "" });
   };
 
-  const toggleTheme = (email) => {
-    setUserThemes({ ...userThemes, [email]: !userThemes[email] });
-  };
-
   return (
     <div style={{ padding: 20 }}>
       <Grid container spacing={3}>
-        {/* FORM SECTION */}
         <Grid item xs={12}>
           <Paper sx={{ p: 2 }}>
-            <h2>User Form</h2>
+            {/* // lagauge */}
+            <h2>{t("user_form")}</h2>
+
             <Grid container spacing={2}>
               <Grid item xs={12} md={5}>
+                {/* // lagauge */}
                 <TextField
                   fullWidth
-                  label="Name"
+                  label={t("name")}
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
                 />
               </Grid>
+
               <Grid item xs={12} md={5}>
                 <TextField
                   fullWidth
-                  label="Email"
+                  label={t("email")}
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                 />
               </Grid>
+
               <Grid item xs={12} md={2}>
                 <Button
                   fullWidth
@@ -71,70 +73,67 @@ export default function DashboardPage() {
                   onClick={handleSubmit}
                   style={{ height: "100%" }}
                 >
-                  Add
+                  {/* // lagauge */}
+                  {t("add")}
                 </Button>
               </Grid>
             </Grid>
           </Paper>
         </Grid>
 
-        {/* TABLE SECTION */}
         <Grid item xs={12}>
           <TableContainer component={Paper}>
             <Table>
               <TableHead>
                 <TableRow>
                   <TableCell>
-                    <b>Name</b>
+                    {/* // lagauge */}
+                    <b>{t("name")}</b>
                   </TableCell>
                   <TableCell>
-                    <b>Email</b>
+                    <b>{t("email")}</b>
                   </TableCell>
                   <TableCell>
-                    <b>Theme</b>
+                    <b>{t("theme")}</b>
                   </TableCell>
                   <TableCell>
-                    <b>Action</b>
+                    <b>{t("action")}</b>
                   </TableCell>
                 </TableRow>
               </TableHead>
+
               <TableBody>
-                {users.map((user, index) => (
+                {users.map((user, i) => (
                   <TableRow
-                    key={index}
+                    key={i}
                     style={{
-                      background: userThemes[user.email] ? "#c02323ff" : "#fff",
+                      background: userThemes[user.email] ? "#222" : "#fff",
                       color: userThemes[user.email] ? "#fff" : "#000",
                     }}
                   >
-                    <TableCell
-                      style={{
-                        color: userThemes[user.email] ? "#fff" : "#000",
-                      }}
-                    >
-                      {user.name}
-                    </TableCell>
-                    <TableCell
-                      style={{
-                        color: userThemes[user.email] ? "#fff" : "#000",
-                      }}
-                    >
-                      {user.email}
-                    </TableCell>
+                    <TableCell>{user.name}</TableCell>
+                    <TableCell>{user.email}</TableCell>
+
                     <TableCell>
                       <FormControlLabel
                         control={
                           <Switch
                             checked={userThemes[user.email] || false}
-                            onChange={() => toggleTheme(user.email)}
+                            onChange={() =>
+                              setUserThemes({
+                                ...userThemes,
+                                [user.email]: !userThemes[user.email],
+                              })
+                            }
                           />
                         }
-                        label={userThemes[user.email] ? "Dark" : "Light"}
+                        label={userThemes[user.email] ? t("dark") : t("light")}
                       />
                     </TableCell>
+
                     <TableCell>
                       <Button size="small" variant="outlined">
-                        View
+                        {t("view")}
                       </Button>
                     </TableCell>
                   </TableRow>

@@ -4,15 +4,15 @@ export const getTheme = (mode = "light") =>
   createTheme({
     palette: {
       mode,
-      primary: { main: "#2e7d32" }, // ✅ Green
+      primary: { main: "#7db6eeff" }, // ✅ Green
       secondary: { main: "#ed6c02" }, // ✅ Orange
 
       background: {
-        default: mode === "light" ? "#e8f5e9" : "#121212", // light = greenish, dark = black
-        paper: mode === "light" ? "#ffffff" : "#1e1e1e", // paper light/dark
+        default: mode === "light" ? "#bfddefff" : "#121212", // light = greenish, dark = black
+        paper: mode === "light" ? "#ffffffff" : "#1e1e1e", // paper light/dark
       },
       text: {
-        primary: mode === "light" ? "#1b5e20" : "#ef882eff", // light text = dark green, dark text = light green
+        primary: mode === "light" ? "#121412ff" : "#ef882eff", // light text = dark green, dark text = light green
         secondary: "#ed6c02", // Orange text secondary
       },
     },
